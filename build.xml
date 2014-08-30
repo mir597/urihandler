@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+
+<project name="urihandler" default="compile" basedir=".">
+  <description>
+  </description>
+
+  <property name="classes" location="classes"/>
+  <property name="deploy" location="deploy"/>
+  <property name="src" location="src"/>
+
+  <target name="clean"
+          description="Delete the ${classes} directory tree and generated files.">
+    <delete dir="${classes}"/>
+    <delete dir="${deploy}"/>
+  </target>
+
+  <target name="compile"
+          description="Compile the code.">
+    <mkdir dir="${classes}"/>
+    <javac
+        srcdir="${src}"
+        destdir="${classes}"
+        encoding="UTF-8"
+        debug="true"
+        includeantruntime="false"
+        fork="true">
+      <include name="**/*.java"/>
+    </javac>
+  </target>
+
+  <target name="jar" depends="compile">
+    <mkdir dir="${deploy}"/>
+	<jar destfile="${deploy}/urihandler.jar" basedir="${classes}"/>
+  </target>
+</project>
